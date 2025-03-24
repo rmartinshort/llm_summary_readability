@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class SummaryPromptV0:
     system_message: str = """

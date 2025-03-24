@@ -3,8 +3,8 @@ from google import genai
 from dataclasses import dataclass
 from typing import Dict, Any
 
-class GeminiCaller:
 
+class GeminiCaller:
     def __init__(self, api_key: str, model: str):
         """
         Initializes the GeminiStructuredOutputCaller with an API key and model name.
@@ -18,13 +18,12 @@ class GeminiCaller:
         self.client = genai.Client(api_key=api_key)
 
     def invoke(
-            self,
-            system_template: dataclass,
-            input_string: str,
-            temperature: float = 0.0,
-            max_tokens: str = 1000
+        self,
+        system_template: dataclass,
+        input_string: str,
+        temperature: float = 0.0,
+        max_tokens: str = 1000,
     ) -> Dict[str, Any]:
-
         try:
             res = self.client.models.generate_content(
                 model=self.model_name,
@@ -32,8 +31,8 @@ class GeminiCaller:
                 config=genai.types.GenerateContentConfig(
                     system_instruction=system_template.system_message,
                     max_output_tokens=max_tokens,
-                    temperature=temperature
-                )
+                    temperature=temperature,
+                ),
             )
             res = json.loads(res.model_dump_json())
         except Exception as e:
