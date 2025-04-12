@@ -24,6 +24,18 @@ class GeminiCaller:
         temperature: float = 0.0,
         max_tokens: str = 1000,
     ) -> Dict[str, Any]:
+        """
+        Invokes the language model to generate content based on the provided input string and system template.
+
+        Args:
+            system_template (dataclass): The template containing system instructions for the model.
+            input_string (str): The input string to be processed by the model.
+            temperature (float, optional): The sampling temperature for controlling randomness in the output. Defaults to 0.0.
+            max_tokens (str, optional): The maximum number of tokens to generate in the output. Defaults to 1000.
+
+        Returns:
+            Dict[str, Any]: The response from the model, parsed as a dictionary. If an error occurs, an empty dictionary is returned.
+        """
         try:
             res = self.client.models.generate_content(
                 model=self.model_name,
